@@ -60,31 +60,49 @@
 </template>
 
 <script>
-import axios from 'axios';
 import Vue from 'vue';
+import axios from 'axios';
+import { VAlert } from 'vuetify/lib';
+
+
 
 Vue.use(axios);
-
 export default {
+    name: 'TambahMahasiswa',
     data() {
-        name:'IndexTambah',
         return {
-            menu : [],
+            mahasiswa: {
+                id_jurusan: ""
+            },
+            jurusan: [] // Update variabel jurusan
         }
     },
-     created(){
-        this.tambah_menu();
-     },
-     methods : {
-        tambah(){  
-            this.tambah_menu();
+    created() {
+        this.fetchJurusan();
+    },
+    methods: {
+        fetchJurusan() {
+            axios
+                .get('http://localhost:8000/api/getjurusan')
+                .then((res) => {
+                    this.jurusan = res.data;
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         },
-        tambah_data(){    
-            axios.post('http://localhost:8000/api/createmenu', this.menu)
-                      .then(() =>
 
-                      )
-                    },
-                }
-    }
+        tambah() {
+            axios
+                .post('http://localhost:8000/api/createmahasiswa', this.mahasiswa)
+                .then(() => {
+                    this.$router.push('/mahasiswa');
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
+
+    },
+};
 </script>
