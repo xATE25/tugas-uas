@@ -69,11 +69,10 @@ export default {
     data() {
         return {
 
-            menu: [] 
+            menu : {},
         }
     },
     created() {
-        this.datamenu();
     },
     methods: {
         datamenu() {
