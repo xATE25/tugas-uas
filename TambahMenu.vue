@@ -25,11 +25,11 @@
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label>Nama Menu</label>
-                                            <input type="text" class="form-control" v-model="Menu.nama">
+                                            <input type="text" class="form-control" v-model="menu.nama_menu">
                                         </div>                                        
                                         <div class="form-group">
                                             <label>Harga</label>
-                                            <input type="text"  class="form-control" v-model="Harga.alamat">
+                                            <input type="text"  class="form-control" v-model="menu.harga">
                                         </div>
                                         <div class="form-group">
                                             <div>
@@ -37,10 +37,10 @@
                                             </div>
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">                                                
                                                 <label class="btn btn-secondary">
-                                                    <input type="radio" value="L" v-model="Menu.jenis"> Makanan
+                                                    <input type="radio" value="L" v-model="menu.jenis"> Makanan
                                                 </label>
                                                 <label class="btn btn-secondary">
-                                                    <input type="radio" value="P" v-model="Menu.jenis"> Minuman
+                                                    <input type="radio" value="P" v-model="menu.jenis"> Minuman
                                                 </label>
                                             </div>
                                         </div>
@@ -62,41 +62,29 @@
 <script>
 import Vue from 'vue';
 import axios from 'axios';
-import { VAlert } from 'vuetify/lib';
-
-
 
 Vue.use(axios);
 export default {
-    name: 'TambahMahasiswa',
+    name: 'IndexTambah',
     data() {
         return {
-            mahasiswa: {
-                id_jurusan: ""
-            },
-            jurusan: [] // Update variabel jurusan
+
+            menu: [] 
         }
     },
     created() {
-        this.fetchJurusan();
+        this.datamenu();
     },
     methods: {
-        fetchJurusan() {
+        datamenu() {
             axios
-                .get('http://localhost:8000/api/getjurusan')
-                .then((res) => {
-                    this.jurusan = res.data;
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
         },
 
         tambah() {
             axios
-                .post('http://localhost:8000/api/createmahasiswa', this.mahasiswa)
+                .post('http://localhost:8000/api/createmenu', this.menu)
                 .then(() => {
-                    this.$router.push('/mahasiswa');
+                    this.$router.push('/menu');
                 })
                 .catch((err) => {
                     console.log(err);
