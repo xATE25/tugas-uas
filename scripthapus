@@ -1,0 +1,9 @@
+hapus(id) {
+            axios.delete(`http://localhost:8000/api/deletemahasiswa/${id}`)
+                .then(() => {
+                    this.mahasiswa = this.mahasiswa.filter(item => item.id !== id);
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+        }
