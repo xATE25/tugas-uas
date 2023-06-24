@@ -100,11 +100,14 @@ export default {
 </script>
 
 
-KosModel::where('id_kos', $id)->update([
-            'nama_kos' => $request->get('nama_kos'),
-            'spesifikasi' => $request->get('spesifikasi'),
-            'fasilitas' => $request->get('fasilitas'),
-            'id_kategori' => $request->get('id_kategori'),
-            'harga_per_bulan' => $request->get('harga_per_bulan'),
-            'status' => $request->get('status')
-        ]);
+ubahStatus(id_transaksi){
+          axios.put("http://127.0.0.1:8000/api/liquid/" + this.id_liquid , DataLiquid)
+        .then(() => {
+          this.getDataLiquid();
+          Swal.fire(
+            'Sukses !',
+            'Data liquid berhasil diupdate.',
+            'success'
+          )
+        })
+      },
