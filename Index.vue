@@ -98,3 +98,13 @@ export default {
     }
 };
 </script>
+
+
+KosModel::where('id_kos', $id)->update([
+            'nama_kos' => $request->get('nama_kos'),
+            'spesifikasi' => $request->get('spesifikasi'),
+            'fasilitas' => $request->get('fasilitas'),
+            'id_kategori' => $request->get('id_kategori'),
+            'harga_per_bulan' => $request->get('harga_per_bulan'),
+            'status' => $request->get('status')
+        ]);
