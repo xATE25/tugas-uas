@@ -24,27 +24,18 @@
                                 <form @submit.prevent="tambah">
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label>Nama pesanan</label>
-                                            <input type="text" class="form-control" v-model="pesanan.nama_pesanan">
+                                            <label>Nama Menu</label>
+                                            <select class="form-control form-control-sm" v-model="pesanan.id_menu">
+                                              <option disabled value="">--Pilih Menu--</option> 
+                                              <option v-for="m in menu" :key="m.id_menu" :value="m.id_menu">
+                                                {{ m.nama_menu }}
+                                              </option>
+                                            </select>
                                         </div>                                        
                                         <div class="form-group">
-                                            <label>Harga</label>
-                                            <input type="text"  class="form-control" v-model="pesanan.harga">
-                                        </div>
-                                        <div class="form-group">
-                                            <div>
-                                                <label>Jenis</label>
-                                            </div>
-                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">                                                
-                                                <label class="btn btn-secondary">
-                                                    <input type="radio" value="makanan" v-model="pesanan.jenis">Makanan
-                                                </label>
-                                                <label class="btn btn-secondary">
-                                                    <input type="radio" value="minuman" v-model="pesanan.jenis">Minuman
-                                                </label>
-                                            </div>
-                                        </div>
-                                       
+                                            <label>Qty</label>
+                                            <input type="text"  class="form-control" v-model="pesanan.qty">
+                                        </div>                                       
                                     </div>
                                     <div class="card-footer">
                                         <button type="submit" class="btn btn-primary">Simpan</button>
@@ -67,9 +58,8 @@ export default {
     data() {
         return {
             pesanan: {
-                nama_pesanan: '',
-                harga: '',
-                jenis: ''
+                id_menu: '',
+                qty: ''
             }
         }
     },
@@ -78,7 +68,7 @@ export default {
             axios
                 .post('http://localhost:8000/api/createtransaksi', this.pesanan)
                 .then(() => {
-                    this.$router.push('/pesanan');
+                    this.$router.push('/transaksi');
                 })
                 .catch((err) => {
                     console.log(err);
