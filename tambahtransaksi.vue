@@ -57,13 +57,27 @@ export default {
     name: 'IndexPesanan',
     data() {
         return {
+            menu: [],
             pesanan: {
                 id_menu: '',
                 qty: ''
             }
         }
     },
+    created() {
+        this.DataMenu();
+    },
     methods: {
+        DataMenu() {
+            axios.get('http://localhost:8000/api/getmenu')
+                .then(response => {
+                    this.menu = response.data;
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+        },
+        
         tambah() {
             axios
                 .post('http://localhost:8000/api/createtransaksi', this.pesanan)
